@@ -11,7 +11,7 @@ void _perror(const char *form, ...)
 	int i;
 
 	va_start(ar, form);
-	for(i = 0; form[i]; i++)
+	for (i = 0; form[i]; i++)
 	{
 		if (form[i] == '%')
 		{

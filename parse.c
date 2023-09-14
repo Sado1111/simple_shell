@@ -1,7 +1,6 @@
 #include "shell.h"
 /**
  * parse - parses a command into portions.
- * @av: array of strings.
  * @line: a given command.
  *
  * Return: array of the command's portions.
