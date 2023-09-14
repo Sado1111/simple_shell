@@ -1,4 +1,4 @@
-#include "main.h"
+#include "shell.h"
 /**
  * main - simple shell.
  * @ac: argumrnt count.
@@ -6,56 +6,40 @@
  *
  * Return: Always 0.
  */
-int main(__attribute__((unused)) int ac, char **av)
+int main(__attribute__((unused)) int ac, char *av[])
 {
 	pid_t cpid;
 	int sts, n = 0;
 	size_t len = 0;
-	char *tmp = NULL, *nil = NULL;
+	char *tmp = NULL, **cm;
 
 	while (1)
 	{
 		if (isatty(STDIN_FILENO) == 1)
-			write(STDOUT_FILENO, "$ ", 2);
+			printf("($) ");
 		n = getline(&tmp, &len, stdin);
-		if (n == EOF)
+		if (n == -1)
 			exit(0);
-		tmp[_strlen(tmp) - 1] = '\0';
+		tmp[len - 1] = '\0';
+		cm = parse(tmp);
 		cpid = fork();
 		if (cpid == -1)
 		{
-			write(STDERR_FILENO, av[0], _strlen(av[0]));
-			write(STDERR_FILENO, ": ", 2);
-			perror(NULL);
+			_perror("%s: ", av[0]);
 			return (1);
 		}
-		if (cpid == 0)
+		else if (cpid == 0)
 		{
-			if (execve(tmp, &nil, environ) == -1)
+			if (execve(cm[0], cm, environ) == -1)
 			{
-				write(STDERR_FILENO, av[0], _strlen(av[0]));
-				write(STDERR_FILENO, ": ", 2);
-				perror(NULL);
+				_perror("%s: ", av[0]);
 				return (1);
 			}
 		}
 		else
 			wait(&sts);
+		free(tmp);
+		free_cm(cm);
 	}
 	return (0);
 }
-/**
- * _strlen - computes the length  of s.
- * @s:  a given string.
- *
- * Return: the length.
- */
-int _strlen(char *s)
-{
-	int len = 0;
-
-	while (s[len])
-		len++;
-	return (len);
-}
-
