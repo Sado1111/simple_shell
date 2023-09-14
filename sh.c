@@ -16,11 +16,10 @@ int main(__attribute__((unused)) int ac, char **av)
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			printf("($) ");
+			write(STDOUT_FILENO, "($) ", 4);
 		if (getline(&tmp, &len, stdin) == -1)
 			exit(0);
 		tmp[_strlen(tmp) - 1] = '\0';
-		printf("_strlen: %d\nlen: %ld\n", _strlen(tmp), len);
 		cm = parse(tmp);
 		cp = fork();
 		if (cp == -1)
