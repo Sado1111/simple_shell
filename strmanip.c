@@ -32,3 +32,22 @@ int _strlen(char *s)
 		len++;
 	return (len);
 }
+/**
+ * _strcmp - compares two strings.
+ * @s1: the first.
+ * @s2: The second.
+ *
+ * Return: 0 if they're the same, a negative value if
+ * s2 > s1, a positive value if s1 > s2. (i.e: *s1 - *s2).
+ */
+int _strcmp(char *s1, char *s2)
+{
+	while (*s1)
+	{
+		if (*s1 != *s2)
+			return (*s1 - *s2);
+		s1++;
+		s2++;
+	}
+	return (0);
+}

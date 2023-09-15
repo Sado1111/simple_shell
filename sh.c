@@ -16,7 +16,10 @@ int main(__attribute__((unused)) int ac, char **av)
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
+		{
 			write(STDOUT_FILENO, "($) ", 4);
+			fflush(stdout);
+		}
 		if (getline(&tmp, &len, stdin) == -1)
 			exit(0);
 		tmp[_strlen(tmp) - 1] = '\0';
@@ -31,8 +34,8 @@ int main(__attribute__((unused)) int ac, char **av)
 		}
 		else
 			wait(&i);
-		free_cm(cm);
-		free(tmp);
 	}
+	free_cm(cm);
+	free(tmp);
 	return (0);
 }
