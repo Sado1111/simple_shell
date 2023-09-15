@@ -5,7 +5,7 @@
  *
  * Return: a pointer to that var, otherwise NULL.
  */
-char *_getenv(const char *name)
+char *_getenv(char *name)
 {
 	char *tmp = NULL;
 	int i = 0;

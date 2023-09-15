@@ -26,6 +26,6 @@ int _putchar(char);
 void print_str(va_list);
 char *_strdup(char *);
 int _strcmp(char *, char *);
-char *_getenv(const char *);
+char *_getenv(char *);
 
 #endif

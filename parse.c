@@ -13,6 +13,8 @@ char **parse(char *line)
 
 	tk = _strdup(line);
 	ae = malloc(sizeof(char *) * (nportion(line, d) + 1));
+	if (ae == NULL)
+		return (NULL);
 	tmp =  strtok(tk, d);
 	while (tmp)
 	{

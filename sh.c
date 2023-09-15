@@ -9,7 +9,7 @@
 int main(__attribute__((unused)) int ac, char **av)
 {
 	pid_t cp;
-	char *tmp = NULL, **cm;
+	char *tmp = NULL, **cm = NULL;
 	size_t len = 0;
 	int i = 0;
 
@@ -21,7 +21,13 @@ int main(__attribute__((unused)) int ac, char **av)
 			fflush(stdout);
 		}
 		if (getline(&tmp, &len, stdin) == -1)
+		{
+			_putchar('\n');
+			free(tmp);
+			if (cm)
+				free_cm(cm);
 			exit(0);
+		}
 		tmp[_strlen(tmp) - 1] = '\0';
 		cm = parse(tmp);
 		cp = fork();
