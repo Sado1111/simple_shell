@@ -43,7 +43,7 @@ int find_and_execute(char *args[], const char *shell_name, int cmd_count)
 {
 	char *path_env_var, *pathToken;
 	char path[KB_LENGTH], cmd_path[KB_LENGTH];
-	struct stat *file_info = NULL;
+	struct stat file_info;
 	int status = 0, found = 0;
 
 	path_env_var = getenv("PATH");
@@ -52,7 +52,7 @@ int find_and_execute(char *args[], const char *shell_name, int cmd_count)
 
 	pathToken = strtok(path, ":");
 
-	if (stat(args[0], file_info) != 0)
+	if (stat(args[0], &file_info) != 0)
 	{
 		while (pathToken != NULL)
 		{
