@@ -11,7 +11,7 @@ int contains_non_digit(const char *s)
 	while (*s)
 	{
 		if (*s < 0 || *s > 9)
-			return (1)
+			return (1);
 		s++;
 	}
 	return (0);
@@ -31,7 +31,7 @@ int parse_input(char *input, char *args[])
 
 	while (cmd_token)
 	{
-		args[i] = token;
+		args[i] = cmd_token;
 		i++;
 		cmd_token = strtok(NULL, " \n\t\r");
 	}

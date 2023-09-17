@@ -43,7 +43,7 @@ int find_and_execute(char *args[], const char *shell_name, int cmd_count)
 {
 	char *path_env_var, *pathToken;
 	char path[KB_LENGTH], cmd_path[KB_LENGTH];
-	struct stat file_info;
+	struct stat *file_info = NULL;
 	int status = 0, found = 0;
 
 	path_env_var = getenv("PATH");
@@ -102,6 +102,8 @@ int check_N_execute(char *args[], const char *shell_name,
 		status = print_env_variables(status);
 	else
 		status = find_and_execute(args, shell_name, cmd_count);
+
+	return (status);
 }
 
 /**
@@ -139,11 +141,11 @@ int main(void)
 		if (getline(&input, &len, stdin) == -1)
 		{
 			if (isatty(STDIN_FILENO))
-				write(STDOUT_FILENO, '\n', 1);
+				write(STDOUT_FILENO, "\n", 1);
 			break;
 		}
 
-		input[_strlen(tmp) - 1] = '\0';
+		input[_strlen(input) - 1] = '\0';
 
 		parse_input(input, args);
 		if (args == NULL || args[0] == NULL)
