@@ -41,17 +41,13 @@ int run_external_cmd(char *args[])
 
 int find_and_execute(char *args[], const char *shell_name, int cmd_count)
 {
-	char *path_env_var, *pathToken;
+	char *pathToken;
 	char path[KB_LENGTH], cmd_path[KB_LENGTH];
 	struct stat file_info;
 	int status = 0, found = 0;
 
-	path_env_var = getenv("PATH");
-
-	strcpy(path, path_env_var);
-
+	strcpy(path, getenv("PATH"));
 	pathToken = strtok(path, ":");
-
 	if (stat(args[0], &file_info) != 0)
 	{
 		while (pathToken != NULL)
@@ -90,6 +86,7 @@ int find_and_execute(char *args[], const char *shell_name, int cmd_count)
  * @cmd_count: no of commands inputted since shell has been run
  * @status: last command's exit status
  * @input: last command inputted by user to be tokenized and used
+ *
  * Return: exit status stored in variable status
  */
 
@@ -108,6 +105,7 @@ int check_N_execute(char *args[], const char *shell_name,
 
 /**
  * derive_ourShellName - uses getenv() to derive the shell name
+ *
  * Return: pointer to char (strings) which the shell name derived
  */
 
@@ -142,7 +140,8 @@ int main(void)
 		{
 			if (isatty(STDIN_FILENO))
 				write(STDOUT_FILENO, "\n", 1);
-			break;
+			free(input);
+			exit(0);
 		}
 
 		input[_strlen(input) - 1] = '\0';

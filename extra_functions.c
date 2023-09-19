@@ -3,6 +3,7 @@
 /**
  * contains_non_digit - finds out if string contains non-digit/not
  * @s: the variable storing string to be checked
+ *
  * Return: 1 string has non-digit value, else 0 if it's only digits
  */
 
@@ -20,6 +21,7 @@ int contains_non_digit(const char *s)
 /**
  * parse_input - tokenizes inputted command into arguments
  * @input: command written by user to stdin
+ 
  * @args: arguments stored in an array, from tokenizing command
  * Return: number of arguments stored in args array
  */
