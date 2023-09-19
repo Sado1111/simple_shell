@@ -21,7 +21,6 @@ int contains_non_digit(const char *s)
 /**
  * parse_input - tokenizes inputted command into arguments
  * @input: command written by user to stdin
- 
  * @args: arguments stored in an array, from tokenizing command
  * Return: number of arguments stored in args array
  */
