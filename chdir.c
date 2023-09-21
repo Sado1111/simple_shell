@@ -81,7 +81,7 @@ void change_directory(char *args[], const char *shell_name, int cmd_count)
 {
 	char cwd[1024];
 
-	if (args[1] == NULL)
+	if ((args[1] == NULL) || (strcmp(args[1], "~") == 0))
 	{
 		change_directory_to_home(shell_name, cmd_count);
 	}
