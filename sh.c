@@ -95,6 +95,8 @@ int check_N_execute(char *args[], const char *shell_name,
 {
 	if (strcmp(args[0], "exit") == 0)
 		status = shell_exit(args, shell_name, cmd_count, status, input);
+	else if (strcmp(args[0], "cd") == 0)
+		handle_cd(args, shell_name, cmd_count);
 	else if (strcmp(args[0], "env") == 0)
 		status = print_env_variables(status);
 	else
