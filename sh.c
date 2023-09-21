@@ -151,5 +151,6 @@ int main(void)
 			continue;
 		status = check_N_execute(args, shell_name, cmd_count, status, input);
 	}
-	return (0);
+	free(input);
+	return (status);
 }
