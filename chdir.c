@@ -26,6 +26,25 @@ void change_directory_to_home(const char *shell_name, int cmd_count)
 		print_cd_error("HOME not set", shell_name, cmd_count);
 		return;
 	}
+		/* If getenv didn't return a value, try using getpwuid */
+	if (home_dir == NULL)
+	{
+		struct passwd *pw = getpwuid(getuid());
+
+		if (pw != NULL)
+		{
+			home_dir = pw->pw_dir;
+		}
+	}
+	/*If we still don't have a home directory, try using getpwnam*/
+	if (home_dir == NULL)
+	{
+		struct passwd *pw = getpwnam(getlogin());
+
+		if (pw != NULL)
+			home_dir = pw->pw_dir;
+	}
+
 
 	if (chdir(home_dir) != 0)
 		print_cd_error("can't cd to HOME", shell_name, cmd_count);

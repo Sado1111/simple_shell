@@ -16,6 +16,7 @@ extern char **environ;
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <pwd.h>
 #include <sys/stat.h>
 
 /* Macros */
