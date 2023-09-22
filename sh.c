@@ -41,13 +41,15 @@ int run_external_cmd(char *args[])
 
 int find_and_execute(char *args[], const char *shell_name, int cmd_count)
 {
-	char *pathToken;
+	char *pathToken, *tmp;
 	char path[KB_LENGTH], cmd_path[KB_LENGTH];
 	struct stat file_info;
 	int status = 0, found = 0;
 
-	strcpy(path, getenv("PATH"));
-	pathToken = strtok(path, ":");
+	tmp = getenv("PATH");
+	if (tmp)
+		strcpy(path, tmp);
+	pathToken = (tmp == NULL ? NULL : strtok(path, ":"));
 	if (stat(args[0], &file_info) != 0)
 	{
 		while (pathToken != NULL)
