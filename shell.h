@@ -16,6 +16,7 @@ extern char **environ;
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <pwd.h>
 #include <sys/stat.h>
 
 /* Macros */
@@ -45,5 +46,13 @@ int check_N_execute(char *args[],
 		int status, char *input);
 char *derive_ourShellName();
 int parse_input(char *input, char *args[]);
+void handle_cd(char *args[], const char *shell_name, int cmd_count);
+void print_cd_error(const char *error_type,
+const char *shell_name, int cmd_count);
+void change_directory_to_home(const char *shell_name, int cmd_count);
+void change_directory_to_specified(const char *directory,
+const char *shell_name, int cmd_count);
+void change_directory_to_previous(const char *shell_name, int cmd_count);
+void change_directory(char *args[], const char *shell_name, int cmd_count);
 
 #endif

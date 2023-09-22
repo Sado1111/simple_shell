@@ -92,3 +92,14 @@ int print_env_variables(int status)
 	}
 	return (0);
 }
+
+/**
+ * handle_cd - function to handle built-in "cd" command
+ * @args: array of arguments for the command
+ * @shell_name: the name of the shell (e.g., "sh")
+ * @cmd_count: the count of commands entered since shell execution
+ */
+void handle_cd(char *args[], const char *shell_name, int cmd_count)
+{
+	change_directory(args, shell_name, cmd_count);
+}
